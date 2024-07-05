@@ -22,5 +22,6 @@ def get_tasks():
 
 @admin_blueprint.route('/proc/<task_id>', methods=['GET'])
 def proc(id):
+
     from flask import current_app
     process_code(id,'',current_app)

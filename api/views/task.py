@@ -1,4 +1,4 @@
-
+import json
 from uuid import uuid4
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -9,7 +9,7 @@ from api.detect import detect
 from flask import current_app
 task_blueprint = Blueprint('task', __name__)
 file_dir = os.path.join(os.getcwd(), 'files') 
-tasks = {}
+
 
 @task_blueprint.route('/api/submit-code', methods=['POST'])
 def submit_code():
@@ -43,11 +43,13 @@ def submit_code():
         )
         db.session.add(detection)
         db.session.commit()
-        print(file_size)
 
-        # Simulate asynchronous task
-        import threading
-        # commit a task, a task may be multi detections
+        algorithmSettings = json.loads(request.form.get('algorithmSettings'))
+        modelSettings =  json.loads(request.form.get('modelSettings'))
+        # print(algorithmSettings)
+        # print(modelSettings)
+
+        ## commit a task, a task may be multi detections
         task_id = str(uuid4())
         # debug info
         task_info = {
@@ -85,38 +87,43 @@ def submit_code():
     else:
         return jsonify({'status':1,'msg':'task created unsuccessfully', 'task_id': -1})
 
+
 def process_code(task_info, file_path, app):
 
     with app.app_context():
-        detect_moudles = task_info['detectModules']
-
+        detect_moudles = task_info['useLargeModel']
+        print("QQFASQ",detect_moudles)
         # rs json.dumps({  'file_name': os.path.basename(file_path),
         #             'standard_check_res':cpp_standard_check(file_path),
         #             'syntax_check_res':cpp_syntax_analysis(file_path)}
         try:
+
             if task_info['useLargeModel']:
                 pass
             # 更新数据库中的进度
             task = ThreadTask.query.filter_by(task_id=task_info['task_id']).first()
-            print("ThreadTask refrash")
-
+            task.progress = 50
+            task.status = 'Working'
+            db.session.commit()
             # 根据 detection_id 查询 Detection 表，并更新 result 字段
             detection = Detection.query.filter_by(id=task.detection_id).first()
             if detection:
                 file_pt = detection.file_path.replace('\\', '\\\\')
-
-                print(file_pt)
+                #print(file_pt)
                 code_language = file_path.split('.')[-1].lower()
-                if code_language  in ['c', 'cpp', 'java', 'python']:
-                    rs = detect(file_pt,code_language, detect_moudles)
-                    detection.result = rs
+                if code_language in ['c', 'cpp', 'java', 'python']:
+                    rs = detect(file_pt,code_language, detectModules=detect_moudles)
+                    detection.result = json.dumps(rs)
                     db.session.commit()
-                    print(f"detection refrash with {rs}")
+                    #print(f"detection refrash with {rs}")
                 task.progress = 100
                 task.status = 'Done'
                 db.session.commit()
+                print("ThreadTask refrash")
 
         except Exception as e:
+            task.progress = 0
+            task.status = 'Pending'
             print(f"process code Exception {e}")
 
 
@@ -135,11 +142,11 @@ def task_status(task_id):
 
 @task_blueprint.route('/api/tasks/<task_id>/cancel', methods=['POST'])
 def cancel_task(task_id):
-    for task in tasks:
-        if task['id'] == task_id:
-            task['status'] = 'canceled'
-            task['progress'] = 0
-            break
+    # for task in tasks:
+    #     if task['id'] == task_id:
+    #         task['status'] = 'canceled'
+    #         task['progress'] = 0
+    #         break
     return jsonify({'message': 'Task canceled'})
 
 @task_blueprint.route('/api/tasks/<task_id>/details', methods=['GET'])

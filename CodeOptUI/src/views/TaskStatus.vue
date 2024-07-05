@@ -24,7 +24,7 @@ const fetchTaskStatus = async () => {
 
 onMounted(() => {
   fetchTaskStatus();
-  setInterval(fetchTaskStatus, 5000); // 每5秒查询一次任务状态
+  //setInterval(fetchTaskStatus, 5000); // 每5秒查询一次任务状态
 });
 </script>
 

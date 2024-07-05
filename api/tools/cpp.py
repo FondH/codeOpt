@@ -2,15 +2,22 @@ import subprocess
 import re
 import json
 import os,sys
+import chardet
 
 curr_dir = os.path.split(os.path.realpath(__file__))[0]
 exe_root = os.path.join(curr_dir, 'exe')
+
+def detect_file_encoding(file_path):
+    with open(file_path, 'rb') as f:
+        raw_data = f.read()
+    result = chardet.detect(raw_data)
+    return result['encoding']
 
 def cpp_standard_check(file_path):
     result = subprocess.run(['cpplint', file_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     cpplint_output = result.stderr.decode('utf-8')
 
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, 'r', encoding=detect_file_encoding(file_path)) as f:
         lines = f.readlines()
 
     cpplint_errors = []
@@ -43,7 +50,7 @@ def cpp_syntax_analysis(file_path):
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     cppcheck_output = result.stderr.decode('latin-1')
 
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, 'r', encoding=detect_file_encoding(file_path)) as f:
         lines = f.readlines()
 
     # 解析XML输出
@@ -76,9 +83,9 @@ def cpp_syntax_analysis(file_path):
 
 
 
-# file_path = r'G:\A大三下\C++\csp\No16-01.cpp'
-# errors = cpp_standard_check(file_path)
-# errors_ = cpp_syntax_analysis(file_path)
-#
-#
-# print(len(errors) + len(errors_))
+file_path = r'G:\\My_Projects\\codeopt\\api\\files\\Likou.cpp'
+errors = cpp_standard_check(file_path)
+errors_ = cpp_syntax_analysis(file_path)
+
+
+print(len(errors) + len(errors_))

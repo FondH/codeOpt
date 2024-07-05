@@ -24,6 +24,52 @@ export default createStore({
     profile:{
 
     },
+    modelSettings: JSON.parse(window.localStorage.getItem('modelSettings')) || {
+      model: 'model1',
+      proxy: '',
+      temperature: 0.7,
+      maxTokens: 100,
+      topP: 0.9,
+      frequencyPenalty: 0,
+      presencePenalty: 0
+    },
+    algorithmSettings: JSON.parse(window.localStorage.getItem('algorithmSettings')) || {
+      python: {
+        syntaxMethod: 'classic',
+        vulnerabilityMethod: 'none',
+        styleCheckMethod: 'classic'
+      },
+      go: {
+        syntaxMethod: 'classic',
+        vulnerabilityMethod: 'none',
+        styleCheckMethod: 'classic'
+      },
+      java: {
+        syntaxMethod: 'classic',
+        vulnerabilityMethod: 'none',
+        styleCheckMethod: 'classic'
+      },
+      cpp: {
+        syntaxMethod: 'classic',
+        vulnerabilityMethod: 'none',
+        styleCheckMethod: 'classic'
+      },
+      js: {
+        syntaxMethod: 'classic',
+        vulnerabilityMethod: 'none',
+        styleCheckMethod: 'classic'
+      },
+      ruby: {
+        syntaxMethod: 'classic',
+        vulnerabilityMethod: 'none',
+        styleCheckMethod: 'classic'
+      },
+      php: {
+        syntaxMethod: 'classic',
+        vulnerabilityMethod: 'none',
+        styleCheckMethod: 'classic'
+      }
+    },
     isAuthenticated: localStorage.getItem('isAuthenticated') || false,
   },
   mutations: {
@@ -58,7 +104,13 @@ export default createStore({
       } else {
         state.isNavFixed = false;
       }
+    },    
+    setModelSettings(state, newSettings) {
+      state.modelSettings = newSettings;
     },
+    setAlgorithmSettings(state, newSettings) {
+      state.algorithmSettings = newSettings;
+    }
   },
   actions,
   getters: {},

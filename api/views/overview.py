@@ -6,8 +6,6 @@ from api.models import Detection, db, ThreadTask
 from sqlalchemy import func
 from datetime import datetime, timedelta
 overview_blueprint = Blueprint('overview', __name__)
-tasks = {}
-
 
 @overview_blueprint.route('/api/submit_overview', methods=['GET'])
 @jwt_required()
@@ -23,12 +21,12 @@ def submit_overview():
     submissions = Detection.query.filter(
         Detection.user_id == user_id,
     ).all()
-    print(submissions.__len__())
+    #print(submissions.__len__())
     date_counts = {}
     for submission in submissions:
         submit_time = datetime.strptime(submission.submit_time, "%Y/%m/%d %H:%M:%S")
         date_str = submit_time.strftime("%m-%d")
-        print(date_str)
+       #print(date_str)
         if date_str in date_counts:
             date_counts[date_str] += 1
         else:
@@ -43,8 +41,8 @@ def submit_overview():
         data.append(date_counts.get(date_str, 0))
 
     total_submissions = len(submissions)
-    print(data)
-    print(labels)
+    #print(data)
+    #print(labels)
 
     return jsonify({
         'labels': labels,
@@ -85,8 +83,8 @@ def recent_submissions():
         })
 
     if submission_list.__len__() > 0:
-        print("dd",submission_list)
-        return jsonify({'submissions': submission_list}), 200
+        #print("dd",submission_list)
+        return jsonify({'submissions': submission_list[submission_list.__len__()-10:]}), 200
     else:
         return jsonify({'msg': 'completely empty' }), 406
 
@@ -97,7 +95,7 @@ def view_report(task_id):
     try:
         task = ThreadTask.query.filter_by(task_id=task_id).first()
         detection = Detection.query.filter_by(id=task.detection_id).first()
-        
+
         return jsonify({'msg':'get report','res':json.loads(detection.result)}), 200
 
     except Exception as e:

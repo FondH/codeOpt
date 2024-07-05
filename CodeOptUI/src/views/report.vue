@@ -46,6 +46,37 @@
     </div>
 </div>
 
+<!-- AI Advice Section -->
+<div class="card mb-4">
+    <div class="mt-4 row">
+    <div class="col-12">
+        <div class="card-header pb-1">
+        <h4>AI Advice</h4>
+        </div>
+        <div class="card-body px-2 pt-0 pb-1">
+        <pre class="px-3 pt-2" style="background-color: #f8f9fa; border-radius: 5px; padding: 10px; font-size: 14px;">
+            {{ repots_ai_advice.join('\n') }}
+        </pre>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- AI Generated Code Section -->
+<div class="card mb-4">
+    <div class="mt-4 row">
+    <div class="col-12">
+        <div class="card-header pb-1">
+        <h4>AI Generated Code</h4>
+        </div>
+        <div class="card-body px-2 pt-0 pb-1">
+        <pre class="px-3 pt-2" style="background-color: #2d2d2d; color: #ffffff; border-radius: 5px; padding: 10px; font-size: 14px;">
+            {{ repots_ai_code.join('\n') }}
+        </pre>
+        </div>
+    </div>
+    </div>
+</div>
 
 </div>
 
@@ -68,30 +99,89 @@ const repots_2 = ref([
 {"file_name": "__init__.py", "file_path": "G:\\A\u5927\u4e09\u4e0b\\\u8f6f\u4ef6\u5de5\u7a0b\\codeopt\\api\\__init__.py", "type": "pylint", "res": [{"line": 9, "column": 1, "message": "expected 2 blank lines, found 0", "type": "checkstyle", "content": "def create_app():"}, {"line": 17, "column": 9, "message": "'models.User' imported but unused", "type": "checkstyle", "content": "from models import User,Detection,ThreadTask"}, {"line": 17, "column": 9, "message": "'models.Detection' imported but unused", "type": "checkstyle", "content": "from models import User,Detection,ThreadTask"}, {"line": 17, "column": 9, "message": "'models.ThreadTask' imported but unused", "type": "checkstyle", "content": "from models import User,Detection,ThreadTask"}, {"line": 17, "column": 32, "message": "missing whitespace after ','", "type": "checkstyle", "content": "from models import User,Detection,ThreadTask"}, {"line": 17, "column": 42, "message": "missing whitespace after ','", "type": "checkstyle", "content": "from models import User,Detection,ThreadTask"}]}
 ]);
 
+const repots_ai_advice = ref(['wu']);
+const repots_ai_code = ref(['wu']);
+
 
 const fetchreport = async () => {
-    console.log(repots_2.value)
   try {
     const response = await getreport(taskId);
-    if (response.status == 200) {
-      let res;
-      res = (response.data.res)
-      console.log(res)
+    if (response.status === 200) {
+      let res = response.data.res;
+      console.log(res);
 
-     repots_2.value[0] = JSON.parse(res.standard_check_res)
-      console.log(JSON.parse(res.standard_check_res))
-    //res = response.data.res
-     
-      reports.value[0] = JSON.parse(res.syntax_check_res)
-  
+      repots_2.value[0] = JSON.parse(res.standard_check_res);
+      console.log(JSON.parse(res.standard_check_res));
 
+      reports.value[0] = JSON.parse(res.syntax_check_res);
+
+      console.log("123", res.ai_res);
+      let aiRes;
+      if (typeof res.ai_res === 'string') { // 如果 res.ai_res 是字符串
+        aiRes = JSON.parse(res.ai_res);
+      } else { // 如果 res.ai_res 已经是对象
+        aiRes = res.ai_res;
+      }
+      
+      if (aiRes) {
+        repots_ai_advice.value[0] = aiRes.advice;
+        repots_ai_code.value[0] = aiRes.code;
+      }
     }
   } catch (error) {
     console.error('Error fetching task status:', error);
+    // 显示错误消息而不是刷新页面
+    alert('Error fetching task status. Please try again later.');
   }
 };
 
 onBeforeMount(() => {
-  fetchreport(); 
+  fetchreport().then(() => {
+    console.log("Data updated:", repots_ai_advice.value[0]);
+  });
 });
 </script>
+
+<style scoped>
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.min-height-300 {
+  min-height: 300px;
+}
+
+.mask {
+  display: block;
+  height: 100%;
+}
+
+.bg-gradient-success {
+  background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;
+}
+
+pre {
+  white-space: pre-wrap; /* Wraps long lines to fit in the container */
+  word-wrap: break-word; /* Breaks long words to fit in the container */
+}
+</style>

@@ -50,6 +50,7 @@ const handleFileChange = () => {
 const submitCode = async () => {
   isLoading.value = true;
   const formData = new FormData();
+  // about file 
   formData.append('user_id', store.state.userInfo.user_id); // file or github
   formData.append('uploadMethod', uploadMethod.value); // file or github
   if (uploadMethod.value === 'file' && file.value) {
@@ -70,11 +71,14 @@ const submitCode = async () => {
     formData.append('prompt', modelOptions.value.prompt);
   }
 
-  // 打印 FormData 的键值对
-//   for (const pair of formData.entries()) {
-//     console.log(`${pair[0]}: ${pair[1]}`);
-//   }
-console.log(file.value)
+  // global settings ... 
+  formData.append('modelSettings',JSON.stringify(store.state.modelSettings));
+  formData.append('algorithmSettings', JSON.stringify(store.state.algorithmSettings));
+  //打印 FormData 的键值对                      algorithmSettings
+    for (const pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
+  console.log(1111,formData.value)
   try {
     const response = await subfile(formData);
     const taskId = response.data.task_id;
@@ -113,16 +117,19 @@ console.log(file.value)
       <div class="mb-3">
         <label for="codeLanguage" class="form-label">Code Language</label>
         <select id="codeLanguage" class="form-control" v-model="codeLanguage" required>
-          <option value="C++">C++</option>
-          <option value="C">C</option>
+          <option value="C++">C++/C</option>
           <option value="Java">Java</option>
-          <option value="Python">Python</option>
+          <option value="Php">Php</option>
+          <option value="Javascript">Javascript/TypeScript</option>
+          <option value="Go">Go</option>
+          <option value="Ruby">Ruby</option>
+
         </select>
       </div>
       <div class="mb-3">
         <label for="detectStrength" class="form-label">Detection Strength</label>
         <select id="detectStrength" class="form-control" v-model="detectStrength">
-          <option value="low">Low</option>
+          <option value="low">Low </option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
@@ -149,7 +156,7 @@ console.log(file.value)
       <div v-if="useLargeModel" class="mb-3">
         <label for="model" class="form-label">Model</label>
         <select id="model" class="form-control" v-model="modelOptions.model">
-          <option v-for="model in availableModels" :key="model" :value="model">{{ model }}</option>
+          <option v-for="model in availableModels" :key="model" >{{ model }}</option>
         </select>
         <label for="prompt" class="form-label mt-2">Prompt</label>
         <input type="text" id="prompt" class="form-control" v-model="modelOptions.prompt" />

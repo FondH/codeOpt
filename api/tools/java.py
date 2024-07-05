@@ -1,7 +1,7 @@
 import json
 import os
 import subprocess
-
+from .run_climate import run_codeclimate
 
 def run_checkstyle(file_path, checkstyle_jar='checkstyle-8.37-all.jar', config_file='google_checks.xml'):
     checkstyle_jar_path = os.path.abspath(os.path.join('exe/checkstyle', checkstyle_jar))

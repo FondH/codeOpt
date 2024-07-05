@@ -12,7 +12,14 @@ const store = useStore();
             :class="store.state.isRTL ? 'text-lg-end' : 'text-lg-start'"
           >
             ©
-            {{ new Date().getFullYear() }}, made by Fond
+            {{ new Date().getFullYear() }}, made by 
+                    <a
+              href="https://github.com/"
+              class="font-weight-bold"
+              target="_blank"
+              >Fond</a
+            >
+            
             <i class="fa fa-heart"></i>  
             further developed based on
             <a

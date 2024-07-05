@@ -25,15 +25,16 @@ def poll_pending_tasks(app):
                     #db.session.commit()
                     detection = Detection.query.filter_by(id=task.detection_id).first()
                     file_path = task.file_path
-                    print(detection)
+
                     task_info = {
                         'task_id': task.task_id,
-                        'detectModules': 1,
+                        'detectModules': detection.detect_modules,
                         'codeLanguage': detection.code_language,
                         'useLargeModel': detection.use_large_model,
                         'prompt': detection.prompt,
                         'model': detection.model
                     }
+                    #print(task_info)
                     threading.Thread(target=process_code, args=(task_info, file_path,app)).start()
         except Exception as e:
             print(f"Error polling tasks: {e}")

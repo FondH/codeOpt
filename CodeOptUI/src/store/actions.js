@@ -68,6 +68,16 @@ export default {
             commit('LOGIN', '')
             window.localStorage.removeItem('token')
         })
+    },
+
+    updateModelSettings({ commit }, newSettings) {
+        commit('setModelSettings', newSettings);
+        window.localStorage.setItem('modelSettings', JSON.stringify(newSettings));
+    },
+
+    updateAlgorithmSettings({ commit }, newSettings) {
+        commit('setAlgorithmSettings', newSettings);
+        window.localStorage.setItem('algorithmSettings', JSON.stringify(newSettings));
     }
   
 }

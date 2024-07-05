@@ -9,7 +9,7 @@
 <p align="center">
 	<img alt="logo" src="./img/dark.png" style="width: 200px; height: auto;">
 </p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">CodeOPT</h1><img src="" alt="0.2" style="zoom:33%;" />
+<h2 align="center" style="margin: 30px 0 30px; ">CodeOPT</h2><img src="" alt="0.2" style="zoom:33%;" />
 
 ### 功能特性
 

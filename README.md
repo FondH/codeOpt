@@ -1,4 +1,4 @@
-# 课程结课作业 - 可视化代码审查工具
+# 软件工程结课作业 - 可视化代码审查工具 - CodeOpt
 
 ## 项目简介
 
@@ -27,9 +27,9 @@
 
 #### 后端部署
 
-1. 克隆后端代码仓库到本地：
+1. 克隆代码仓库到本地：
     ```bash
-    git clone <后端仓库URL>
+    git clone https://github.com/FondH/codeOpt.git
     ```
 
 2. 进入后端目录：
@@ -49,32 +49,27 @@
 
 #### 前端部署
 
-1. 克隆前端代码仓库到本地：
-    ```bash
-    git clone <前端仓库URL>
-    ```
-
-2. 进入前端目录：
+1. 进入前端目录：
     ```bash
     cd CodeOptUI
     ```
 
-3. 安装依赖：
+2. 安装依赖：
     ```bash
     npm install
     ```
 
-4. 调试前端程序：
+3. 调试前端程序：
     ```bash
     npm run serve
     ```
 
-5. 构建前端程序：
+4. 构建前端程序：
     ```bash
     npm run build
     ```
 
-6. 其他脚本：
+5. 其他脚本：
     - 代码检查：
         ```bash
         npm run lint

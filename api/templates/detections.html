@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detections</title>
+</head>
+<body>
+    <h1>All Detections</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Detection ID</th>
+            <th>User ID</th>
+            <th>File Path</th>
+            <th>Upload Method</th>
+            <th>Submitter Name</th>
+            <th>Submit Time</th>
+            <th>File Name</th>
+            <th>File Size</th>
+            <th>Code Language</th>
+            <th>Detect Strength</th>
+            <th>Detect Modules</th>
+            <th>Use Large Model</th>
+            <th>Model</th>
+            <th>Prompt</th>
+            <th>res</th>
+        </tr>
+        {% for detection in detections %}
+        <tr>
+            <td>{{ detection.id }}</td>
+            <td>{{ detection.detection_id }}</td>
+            <td>{{ detection.user_id }}</td>
+            <td>{{ detection.file_path }}</td>
+            <td>{{ detection.upload_method }}</td>
+            <td>{{ detection.submitter_name }}</td>
+            <td>{{ detection.submit_time }}</td>
+            <td>{{ detection.file_name }}</td>
+            <td>{{ detection.file_size }}</td>
+            <td>{{ detection.code_language }}</td>
+            <td>{{ detection.detect_strength }}</td>
+            <td>{{ detection.detect_modules }}</td>
+            <td>{{ detection.use_large_model }}</td>
+            <td>{{ detection.model }}</td>
+            <td>{{ detection.prompt }}</td>
+            <td>
+            {% if detection.result %}
+                {% set result_words = detection.result.split() %}
+                {{ result_words[:3] | join(' ') }}
+            {% else %}
+                No result
+            {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

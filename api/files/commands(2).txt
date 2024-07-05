@@ -1,0 +1,82 @@
+GAMECORE
+gamecore-server.exe server --server-address :23432
+
+
+GRAFANA
+pgrep -af grafana-server
+http://127.0.0.1:8081
+
+
+BATTLE
+export BATTLE_TASK_ID=955605-3
+export MAX_EPISODE=1
+export CAMP_DRIVER=1v1_roundrobin_camp_heroes
+export CAMP_DRIVER_CONFIG=WzExMV0=
+python3 /aiarena/battle/battle.py --driver_0 common_ai --driver_1 local_dir --server_1 /aiarena/
+
+export CAMP_DRIVER=3v3_roundrobin_lane_heroes
+export CAMP_DRIVER_CONFIG=W1sxNTcsIDE3NCwgMTY3XV0=
+
+
+ACTOR
+docker run -it -p 35000-35600:35000-35600 --network hoknet --name hok1v1_actor hok1v1_env /bin/bash
+export GAMECORE_SERVER_ADDR="host.docker.internal:23432" 
+echo "172.18.0.2 root 36000 1" > /aiarena/scripts/actor/learner.iplist
+export ACTOR_NUM=1
+sh /aiarena/scripts/actor/start_actor.sh
+
+
+docker start hok1v1_actor 
+docker exec -it hok1v1_actor /bin/bash
+docker stop hok1v1_actor 
+
+
+LEARNER
+docker run -it -p 8081:8081 --gpus all --network hoknet --name hok1v1_learner hok1v1_env /bin/bash
+echo "172.18.0.2 root 36000 1" > /aiarena/scripts/learner/learner.iplist
+export NOT_USE_INFLUXDB_EXPORTER=1
+sh /aiarena/scripts/learner/start_learner.sh
+
+
+docker start hok1v1_learner 
+docker exec -it hok1v1_learner /bin/bash
+docker stop hok1v1_learner 
+
+
+TEST
+cd hok_env/hok/hok1v1/unit_test/
+python test_env.py
+cd ../../../..
+
+
+OTHER
+docker network ls
+docker network create hoknet
+docker exec hok_env_actor ping hok_env_learner
+docker exec hok_env_learner ping hok_env_actor 
+docker run -it --rm --name test_env hok1v1_env /bin/bash
+docker commit test_env hok1v1_env
+ln -s /aiarena/1v1/ /aiarena/code
+sh /aiarena/scripts/start_test.sh
+sh /aiarena/scripts/kill_all.sh
+docker port hok_env_learner
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' hok_env_learner 
+
+
+UPLOAD
+docker login
+docker tag hok1v1_env:latest starlight0798/hok1v1_env:latest
+docker push starlight0798/hok1v1_env:latest
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thread Tasks</title>
+</head>
+<body>
+    <h1>All Thread Tasks</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Task ID</th>
+            <th>User ID</th>
+            <th>Detection ID</th>
+            <th>Progress</th>
+            <th>Status</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Is Canceled</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.task_id }}</td>
+            <td>{{ task.user_id }}</td>
+            <td>{{ task.detection_id }}</td>
+            <td>{{ task.progress }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.start_time }}</td>
+            <td>{{ task.end_time }}</td>
+            <td>{{ task.is_canceled }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

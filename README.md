@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-本项目是一个集成多个代码审计工具的可视化代码审查工具，使用技术栈包括 Vue 3、一个 UI 库（脚手架见[Vue Argon Dashboard 2](http://demos.creative-tim.com/vue-argon-dashboard/?ref=readme-vad) ）、Flask 和 SQLite / MySQL。
+本项目是一个集成多个代码审计工具的可视化代码审查工具，使用技术栈包括 Vue 3、Argon Dashboard framework、Flask 和 SQLite / MySQL。
 
 
 

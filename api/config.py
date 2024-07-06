@@ -1,7 +1,7 @@
 import os
 from datetime import timedelta
 class Config:
-    # ∆Ù∂Ø≈‰÷√
+    # ÂêØÂä®ÈÖçÁΩÆ
     HOST = '0.0.0.0'
     PORT = 10262
     DEBUG = True
@@ -24,15 +24,14 @@ class Config:
     os.environ['https_proxy'] = ''
 
 
-    # ∆Ù”√ Mysql
-    USE_MYSQL = False
+    # ÂêØÁî® Mysql
+    USE_MYSQL = ''
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'your_password'
     MYSQL_HOST = 'localhost'
     MYSQL_PORT = '3306'
     MYSQL_DB = 'CodeOpt2'
-
-    # ∏˘æ› USE_MYSQL —°‘Ò ˝æ›ø‚
+    # Ê†πÊçÆ USE_MYSQL ÈÄâÊã©Êï∞ÊçÆÂ∫ì
     if USE_MYSQL:
         SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}'
     else:

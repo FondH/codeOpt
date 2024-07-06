@@ -1,138 +1,136 @@
 """
-Ó¦ÓÃ³ÌÐòÂ·ÓÉ×Ü½á¼°¹¦ÄÜ½éÉÜ
 
+åº”ç”¨ç¨‹åºè·¯ç”±æ€»ç»“åŠåŠŸèƒ½ä»‹ç»
 1. Overview Blueprint
 
 - Blueprint: overview_blueprint
 
-- Â·ÓÉ:
+- è·¯ç”±:
   - `/api/submit_overview`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: Ìá½»²¢»ñÈ¡¹ýÈ¥7ÌìµÄÌá½»Êý¾Ý¸ÅÀÀ¡£
-    - ÒªÇó: ÐèÒª JWT ÈÏÖ¤¡£
-    - ·µ»Ø: °üº¬Ìá½»ÈÕÆÚµÄ±êÇ©ºÍÊý¾Ý£¬ÒÔ¼°×ÜÌá½»Êý¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: æäº¤å¹¶èŽ·å–è¿‡åŽ»7å¤©çš„æäº¤æ•°æ®æ¦‚è§ˆã€‚
+    - è¦æ±‚: éœ€è¦ JWT è®¤è¯ã€‚
+    - è¿”å›ž: åŒ…å«æäº¤æ—¥æœŸçš„æ ‡ç­¾å’Œæ•°æ®ï¼Œä»¥åŠæ€»æäº¤æ•°ã€‚
 
   - `/api/submit_recent`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡×î½ü15ÌìµÄÌá½»¼ÇÂ¼¡£
-    - ÒªÇó: ÐèÒª JWT ÈÏÖ¤¡£
-    - ·µ»Ø: ×î½üÌá½»¼ÇÂ¼ÁÐ±í£¬×î¶à·µ»Ø×î½ü10Ìõ¼ÇÂ¼¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–æœ€è¿‘15å¤©çš„æäº¤è®°å½•ã€‚
+    - è¦æ±‚: éœ€è¦ JWT è®¤è¯ã€‚
+    - è¿”å›ž: æœ€è¿‘æäº¤è®°å½•åˆ—è¡¨ï¼Œæœ€å¤šè¿”å›žæœ€è¿‘10æ¡è®°å½•ã€‚
 
   - `/api/view-report/<task_id>`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: ²é¿´ÌØ¶¨ÈÎÎñµÄ±¨¸æ¡£
-    - ÒªÇó: ÐèÒª JWT ÈÏÖ¤¡£
-    - ·µ»Ø: ÈÎÎñ±¨¸æÊý¾Ý¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: æŸ¥çœ‹ç‰¹å®šä»»åŠ¡çš„æŠ¥å‘Šã€‚
+    - è¦æ±‚: éœ€è¦ JWT è®¤è¯ã€‚
+    - è¿”å›ž: ä»»åŠ¡æŠ¥å‘Šæ•°æ®ã€‚
 
 2. Auth Blueprint
 
 - Blueprint: auth_blueprint
 
-- Â·ÓÉ:
+- è·¯ç”±:
   - `/api/register`
-    - ·½·¨: POST
-    - ¹¦ÄÜ: ×¢²áÐÂÓÃ»§¡£
-    - ÒªÇó: Ìá¹©ÓÃ»§Ãû¡¢ÓÊÏäºÍÃÜÂë¡£
-    - ·µ»Ø: ×¢²á³É¹¦»òÊ§°ÜµÄÏûÏ¢¡£
+    - æ–¹æ³•: POST
+    - åŠŸèƒ½: æ³¨å†Œæ–°ç”¨æˆ·ã€‚
+    - è¦æ±‚: æä¾›ç”¨æˆ·åã€é‚®ç®±å’Œå¯†ç ã€‚
+    - è¿”å›ž: æ³¨å†ŒæˆåŠŸæˆ–å¤±è´¥çš„æ¶ˆæ¯ã€‚
 
   - `/api/login2`
-    - ·½·¨: POST
-    - ¹¦ÄÜ: ÓÃ»§µÇÂ¼¡£
-    - ÒªÇó: Ìá¹©ÓÃ»§ÃûºÍÃÜÂë¡£
-    - ·µ»Ø: ÓÃ»§ÐÅÏ¢ºÍ·ÃÎÊÁîÅÆ¡£
+    - æ–¹æ³•: POST
+    - åŠŸèƒ½: ç”¨æˆ·ç™»å½•ã€‚
+    - è¦æ±‚: æä¾›ç”¨æˆ·åå’Œå¯†ç ã€‚
+    - è¿”å›ž: ç”¨æˆ·ä¿¡æ¯å’Œè®¿é—®ä»¤ç‰Œã€‚
 
   - `/updateUserinfo`
-    - ·½·¨: POST
-    - ¹¦ÄÜ: ¸üÐÂÓÃ»§ÐÅÏ¢¡£
-    - ÒªÇó: Ìá¹©ÓÃ»§ÃûºÍÐèÒª¸üÐÂµÄÐÅÏ¢¡£
-    - ·µ»Ø: ¸üÐÂ³É¹¦»òÊ§°ÜµÄÏûÏ¢¡£
+    - æ–¹æ³•: POST
+    - åŠŸèƒ½: æ›´æ–°ç”¨æˆ·ä¿¡æ¯ã€‚
+    - è¦æ±‚: æä¾›ç”¨æˆ·åå’Œéœ€è¦æ›´æ–°çš„ä¿¡æ¯ã€‚
+    - è¿”å›ž: æ›´æ–°æˆåŠŸæˆ–å¤±è´¥çš„æ¶ˆæ¯ã€‚
 
   - `/profile`
-    - ·½·¨: GET, POST
-    - ¹¦ÄÜ: »ñÈ¡ÓÃ»§µÄ¸öÈËÐÅÏ¢¡£
-    - ÒªÇó: ÐèÒª JWT ÈÏÖ¤¡£
-    - ·µ»Ø: ÓÃ»§¸öÈËÐÅÏ¢¡£
+    - æ–¹æ³•: GET, POST
+    - åŠŸèƒ½: èŽ·å–ç”¨æˆ·çš„ä¸ªäººä¿¡æ¯ã€‚
+    - è¦æ±‚: éœ€è¦ JWT è®¤è¯ã€‚
+    - è¿”å›ž: ç”¨æˆ·ä¸ªäººä¿¡æ¯ã€‚
 
 3. Task Blueprint
 
 - Blueprint: task_blueprint
 
-- Â·ÓÉ:
+- è·¯ç”±:
   - `/api/submit-code`
-    - ·½·¨: POST
-    - ¹¦ÄÜ: Ìá½»´úÂë½øÐÐ¼ì²â¡£
-    - ÒªÇó: Ìá¹©ÓÃ»§ID¡¢ÎÄ¼þ¼°Ïà¹ØÐÅÏ¢¡£
-    - ·µ»Ø: ÈÎÎñ´´½¨³É¹¦»òÊ§°ÜµÄÏûÏ¢¡£
+    - æ–¹æ³•: POST
+    - åŠŸèƒ½: æäº¤ä»£ç è¿›è¡Œæ£€æµ‹ã€‚
+    - è¦æ±‚: æä¾›ç”¨æˆ·IDã€æ–‡ä»¶åŠç›¸å…³ä¿¡æ¯ã€‚
+    - è¿”å›ž: ä»»åŠ¡åˆ›å»ºæˆåŠŸæˆ–å¤±è´¥çš„æ¶ˆæ¯ã€‚
 
   - `/api/task-status/<task_id>`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡ÌØ¶¨ÈÎÎñµÄ×´Ì¬¡£
-    - ÒªÇó: Ìá¹©ÈÎÎñID¡£
-    - ·µ»Ø: ÈÎÎñ×´Ì¬ÐÅÏ¢¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–ç‰¹å®šä»»åŠ¡çš„çŠ¶æ€ã€‚
+    - è¦æ±‚: æä¾›ä»»åŠ¡IDã€‚
+    - è¿”å›ž: ä»»åŠ¡çŠ¶æ€ä¿¡æ¯ã€‚
 
   - `/api/tasks/<task_id>/cancel`
-    - ·½·¨: POST
-    - ¹¦ÄÜ: È¡ÏûÌØ¶¨ÈÎÎñ¡£
-    - ÒªÇó: Ìá¹©ÈÎÎñID¡£
-    - ·µ»Ø: ÈÎÎñÈ¡Ïû³É¹¦µÄÏûÏ¢¡£
+    - æ–¹æ³•: POST
+    - åŠŸèƒ½: å–æ¶ˆç‰¹å®šä»»åŠ¡ã€‚
+    - è¦æ±‚: æä¾›ä»»åŠ¡IDã€‚
+    - è¿”å›ž: ä»»åŠ¡å–æ¶ˆæˆåŠŸçš„æ¶ˆæ¯ã€‚
 
   - `/api/tasks/<task_id>/details`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡ÌØ¶¨ÈÎÎñµÄÏêÏ¸ÐÅÏ¢¡£
-    - ÒªÇó: Ìá¹©ÈÎÎñID¡£
-    - ·µ»Ø: ÈÎÎñÏêÏ¸ÐÅÏ¢¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–ç‰¹å®šä»»åŠ¡çš„è¯¦ç»†ä¿¡æ¯ã€‚
+    - è¦æ±‚: æä¾›ä»»åŠ¡IDã€‚
+    - è¿”å›ž: ä»»åŠ¡è¯¦ç»†ä¿¡æ¯ã€‚
 
   - `/api/task_table`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡ÓÃ»§µÄËùÓÐÈÎÎñ¼°Æä½á¹û¡£
-    - ÒªÇó: ÐèÒª JWT ÈÏÖ¤¡£
-    - ·µ»Ø: ÓÃ»§µÄÈÎÎñÁÐ±í¼°½á¹û¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–ç”¨æˆ·çš„æ‰€æœ‰ä»»åŠ¡åŠå…¶ç»“æžœã€‚
+    - è¦æ±‚: éœ€è¦ JWT è®¤è¯ã€‚
+    - è¿”å›ž: ç”¨æˆ·çš„ä»»åŠ¡åˆ—è¡¨åŠç»“æžœã€‚
 
   - `/api/available-models`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡¿ÉÓÃÄ£ÐÍÁÐ±í¡£
-    - ÒªÇó: ÎÞ¡£
-    - ·µ»Ø: Ä£ÐÍÁÐ±í¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–å¯ç”¨æ¨¡åž‹åˆ—è¡¨ã€‚
+    - è¦æ±‚: æ— ã€‚
+    - è¿”å›ž: æ¨¡åž‹åˆ—è¡¨ã€‚
 
 4. Admin Blueprint
 
 - Blueprint: admin_blueprint
 
-- Â·ÓÉ:
+- è·¯ç”±:
   - `/getusers`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡ËùÓÐÓÃ»§ÐÅÏ¢¡£
-    - ÒªÇó: ÎÞ¡£
-    - ·µ»Ø: ÓÃ»§ÐÅÏ¢ÁÐ±í¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–æ‰€æœ‰ç”¨æˆ·ä¿¡æ¯ã€‚
+    - è¦æ±‚: æ— ã€‚
+    - è¿”å›ž: ç”¨æˆ·ä¿¡æ¯åˆ—è¡¨ã€‚
 
   - `/getdetections`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡ËùÓÐ¼ì²âÐÅÏ¢¡£
-    - ÒªÇó: ÎÞ¡£
-    - ·µ»Ø: ¼ì²âÐÅÏ¢ÁÐ±í¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–æ‰€æœ‰æ£€æµ‹ä¿¡æ¯ã€‚
+    - è¦æ±‚: æ— ã€‚
+    - è¿”å›ž: æ£€æµ‹ä¿¡æ¯åˆ—è¡¨ã€‚
 
   - `/gettasks`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: »ñÈ¡ËùÓÐÈÎÎñÐÅÏ¢¡£
-    - ÒªÇó: ÎÞ¡£
-    - ·µ»Ø: ÈÎÎñÐÅÏ¢ÁÐ±í¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: èŽ·å–æ‰€æœ‰ä»»åŠ¡ä¿¡æ¯ã€‚
+    - è¦æ±‚: æ— ã€‚
+    - è¿”å›ž: ä»»åŠ¡ä¿¡æ¯åˆ—è¡¨ã€‚
 
   - `/proc/<task_id>`
-    - ·½·¨: GET
-    - ¹¦ÄÜ: ´¦ÀíÌØ¶¨ÈÎÎñ¡£
-    - ÒªÇó: Ìá¹©ÈÎÎñID¡£
-    - ·µ»Ø: ÎÞ¡£
+    - æ–¹æ³•: GET
+    - åŠŸèƒ½: å¤„ç†ç‰¹å®šä»»åŠ¡ã€‚
+    - è¦æ±‚: æä¾›ä»»åŠ¡IDã€‚
+    - è¿”å›ž: æ— ã€‚
 """
 
-# ÄãµÄÆäËû app.py ÄÚÈÝÔÚÕâÀï
 from api import app
 
 if __name__ == '__main__':
     # rs = detect('G:\\My_Projects\\codeopt\\api\\files\\Tencent.txt', 'c',1)
     # print(rs)
-    if __name__ == '__main__':
-        app.run(
-            host=app.config['HOST'],
-            port=app.config['PORT'],
-            debug=app.config['DEBUG']
-        )
+	app.run(
+		host=app.config['HOST'],
+		port=app.config['PORT'],
+		debug=app.config['DEBUG']
+	)

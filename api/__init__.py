@@ -12,6 +12,7 @@ from views.task import process_code
 import threading, time
 
 
+
 def poll_pending_tasks(app):
     #
     while True:
@@ -41,11 +42,11 @@ def poll_pending_tasks(app):
         time.sleep(10)
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config.Config')
+    from config import Config
+    app.config.from_object(Config)
     CORS(app)
     db.init_app(app)
     jwt.init_app(app)
-
 
     with app.app_context():
 

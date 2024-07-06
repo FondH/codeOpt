@@ -44,6 +44,10 @@ export default {
   },
 
   methods:{
+    validateEmail(email) {
+      const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      return re.test(email);
+    },
     doRegister(event){
       event.preventDefault()
       
@@ -55,7 +59,14 @@ export default {
         }, 1500); // Hide after 1 seconds
         return;
       }
-      
+      if (!this.validateEmail(this.email)) {
+        this.errorMessage = 'Invalid email format';
+        this.showError = true;
+        setTimeout(() => {
+          this.showError = false;
+        }, 2000); // Hide after 2 seconds
+        return;
+      }
       this.$store.dispatch('toRegister', {
         username:this.username,
         email:this.email,

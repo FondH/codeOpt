@@ -74,11 +74,12 @@ const submitCode = async () => {
   // global settings ... 
   formData.append('modelSettings',JSON.stringify(store.state.modelSettings));
   formData.append('algorithmSettings', JSON.stringify(store.state.algorithmSettings));
-  //打印 FormData 的键值对                      algorithmSettings
+  //打印 FormData 的键值对 
+    console.log(1111,'Form 表单！！')
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}: ${pair[1]}`);
     }
-  console.log(1111,formData.value)
+
   try {
     const response = await subfile(formData);
     const taskId = response.data.task_id;

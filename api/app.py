@@ -124,8 +124,10 @@
     - 返回: 无。
 """
 
-from api import app
 
+import sys,os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api import app
 if __name__ == '__main__':
     # rs = detect('G:\\My_Projects\\codeopt\\api\\files\\Tencent.txt', 'c',1)
     # print(rs)
